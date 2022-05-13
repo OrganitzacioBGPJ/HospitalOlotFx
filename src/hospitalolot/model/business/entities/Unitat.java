@@ -8,7 +8,7 @@ package hospitalolot.model.business.entities;
  *
  * @author Bernat
  */
-public class Unitat {
+public class Unitat extends Entity{
     
     private String nom;
     private String tipus;

@@ -8,7 +8,7 @@ package hospitalolot.model.business.entities;
  *
  * @author Bernat
  */
-public class Categoria {
+public class Categoria extends Entity{
     
     private String tipus;
 

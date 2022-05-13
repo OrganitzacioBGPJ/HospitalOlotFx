@@ -8,7 +8,7 @@ package hospitalolot.model.business.entities;
  *
  * @author Bernat
  */
-public class Treballador {
+public class Treballador extends Entity{
     
     private String nom;
     private String cognom;

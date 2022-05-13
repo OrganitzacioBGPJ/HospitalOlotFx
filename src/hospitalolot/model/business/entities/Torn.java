@@ -8,7 +8,7 @@ package hospitalolot.model.business.entities;
  *
  * @author Bernat
  */
-public class Torn {
+public class Torn extends Entity{
     
     private String horari;
 

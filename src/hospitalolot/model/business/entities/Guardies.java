@@ -10,8 +10,11 @@ import java.util.Date;
  *
  * @author Bernat
  */
-public class Guardies {
+public class Guardies extends Entity{
     
+    Unitat u;
+    Torn t;
+    Categoria c;
     private Date dia;
     private byte quantitatTreballadors;
 
