@@ -12,6 +12,10 @@ public class Torn extends Entity{
     
     private String horari;
 
+    public Torn(String horari) {
+        this.horari = horari;
+    }
+
     public String getHorari() {
         return horari;
     }

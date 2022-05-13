@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Bernat
  */
-public class JDBCTorn implements TornDAO{
+public class JDBCTorn implements TornDAO {
 
     @Override
     public Torn get(long id) throws DAOException {
@@ -31,8 +31,11 @@ public class JDBCTorn implements TornDAO{
             Statement query = MySQLConnection.getInstance().getConnection().createStatement();
             ResultSet result = query.executeQuery("Select * from persones");
             List<Torn> llista = new ArrayList<Torn>();
-            while(result.next()){
-                llista.add(new Torn());
+            while (result.next()) {
+                llista.add(new Torn(result.getString("Horari"))
+                setId(result.getInt("idTorn"))
+            
+            ); //,result.getInt("idTorn") si s'ha d'afegir l'id del torn
             }
             return llista;
         } catch (SQLException ex) {
@@ -54,5 +57,5 @@ public class JDBCTorn implements TornDAO{
     public void update(Torn t) throws DAOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
