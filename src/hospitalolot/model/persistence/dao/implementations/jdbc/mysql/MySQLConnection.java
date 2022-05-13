@@ -24,6 +24,7 @@ public class MySQLConnection {
     
     private static MySQLConnection instance;
     private Connection connection;
+    
     private MySQLConnection() {
         Properties prop = new Properties();
         try{
