@@ -32,8 +32,8 @@ public class JDBCTorn implements TornDAO {
             ResultSet result = query.executeQuery("Select * from persones");
             List<Torn> llista = new ArrayList<Torn>();
             while (result.next()) {
-                llista.add(new Torn(result.getString("Horari"))
-                setId(result.getInt("idTorn"))
+                Torn t = new Torn(result.getString("Horari");
+                //setId(result.getInt("idTorn"))
             
             ); //,result.getInt("idTorn") si s'ha d'afegir l'id del torn
             }
