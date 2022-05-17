@@ -16,6 +16,11 @@ public class Torn extends Entity{
         this.horari = horari;
     }
 
+    public Torn(String horari, long id) {
+        super(id);
+        this.horari = horari;
+    }
+
     public String getHorari() {
         return horari;
     }
