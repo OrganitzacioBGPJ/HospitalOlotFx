@@ -14,6 +14,22 @@ public class Treballador extends Entity{
     private String cognom;
     private Boolean temporal;
 
+    public Treballador(String nom, String cognom, Boolean temporal) {
+        this.nom = nom;
+        this.cognom = cognom;
+        this.temporal = temporal;
+    }
+
+    public Treballador(long id, String nom, String cognom, Boolean temporal) {
+        super(id);
+        this.nom = nom;
+        this.cognom = cognom;
+        this.temporal = temporal;
+    }
+
+    public Treballador() {
+    }
+
     public String getNom() {
         return nom;
     }
@@ -36,6 +52,10 @@ public class Treballador extends Entity{
 
     public void setTemporal(Boolean temporal) {
         this.temporal = temporal;
+    }
+    
+    public void reservarGuardia(Guardies g) {
+        
     }
     
     

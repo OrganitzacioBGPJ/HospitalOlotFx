@@ -12,12 +12,15 @@ import hospitalolot.model.business.utilities.NumberUtils;
  */
 abstract public class Entity {
     
-    private long id = NumberUtils.UNSAVED_VALUE;
+    private long id;
     
     public Entity() {
-        
+        id = NumberUtils.UNSAVED_VALUE;
     }
 
+    public Entity(long id) {
+        setId(id);
+    }
     public long getId() {
         return id;
     }

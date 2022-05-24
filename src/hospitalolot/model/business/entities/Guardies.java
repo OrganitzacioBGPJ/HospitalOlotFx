@@ -12,11 +12,43 @@ import java.util.Date;
  */
 public class Guardies extends Entity{
     
-    Unitat u;
-    Torn t;
-    Categoria c;
+    private Unitat u;
+    private Torn t;
+    private Categoria c;
     private Date dia;
     private byte quantitatTreballadors;
+
+    public Guardies() {
+    }
+
+    public Unitat getU() {
+        return u;
+    }
+
+    public Torn getT() {
+        return t;
+    }
+
+    public Categoria getC() {
+        return c;
+    }
+
+    public Guardies(Unitat u, Torn t, Categoria c, Date dia, byte quantitatTreballadors) {
+        this.u = u;
+        this.t = t;
+        this.c = c;
+        this.dia = dia;
+        this.quantitatTreballadors = quantitatTreballadors;
+    }
+
+    public Guardies(Unitat u, Torn t, Categoria c, Date dia, byte quantitatTreballadors, long id) {
+        super(id);
+        this.u = u;
+        this.t = t;
+        this.c = c;
+        this.dia = dia;
+        this.quantitatTreballadors = quantitatTreballadors;
+    }
 
     public Date getDia() {
         return dia;
@@ -33,6 +65,18 @@ public class Guardies extends Entity{
     public void setQuantitatTreballadors(byte quantitatTreballadors) {
         this.quantitatTreballadors = quantitatTreballadors;
     }
-    
+
+    public void setU(Unitat u) {
+        this.u = u;
+    }
+
+    public void setT(Torn t) {
+        this.t = t;
+    }
+
+    public void setC(Categoria c) {
+        this.c = c;
+    }
+   
     
 }

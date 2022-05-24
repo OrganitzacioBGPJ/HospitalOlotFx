@@ -10,15 +10,21 @@ package hospitalolot.model.business.entities;
  */
 public class Unitat extends Entity{
     
-    private String nom;
     private String tipus;
 
-    public String getNom() {
-        return nom;
+
+
+    public Unitat() {
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public Unitat(long id, String tipus) {
+        super(id);
+        this.tipus = tipus;
+    }
+
+ 
+    public Unitat( String tipus) {
+        this.tipus = tipus;
     }
 
     public String getTipus() {

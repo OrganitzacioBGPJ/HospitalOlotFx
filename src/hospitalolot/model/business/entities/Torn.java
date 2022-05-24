@@ -13,13 +13,20 @@ public class Torn extends Entity{
     private String horari;
 
     public Torn(String horari) {
+        super();
         this.horari = horari;
     }
+    
 
     public Torn(String horari, long id) {
         super(id);
         this.horari = horari;
     }
+
+    public Torn() {
+    }
+
+
 
     public String getHorari() {
         return horari;

@@ -12,10 +12,21 @@ public class Categoria extends Entity{
     
     private String tipus;
 
+    public Categoria() {
+    }
+
+    public Categoria(String tipus, long id) {
+        super(id);
+        this.tipus = tipus;
+    }
+
+    public Categoria(String tipus) {
+        this.tipus = tipus;
+    }
+
     public String getTipus() {
         return tipus;
     }
-
     public void setTipus(String tipus) {
         this.tipus = tipus;
     }

@@ -4,10 +4,12 @@
  */
 package hospitalolot.model.persistence.dao.implementations.jdbc;
 
+import hospitalolot.model.business.entities.Categoria;
 import hospitalolot.model.business.entities.Torn;
-import hospitalolot.model.persistence.dao.contract.TornDAO;
+import hospitalolot.model.persistence.dao.contract.CategoriaDAO;
 import hospitalolot.model.persistence.dao.implementations.jdbc.mysql.MySQLConnection;
 import hospitalolot.model.persistence.exception.DAOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,23 +17,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.sql.PreparedStatement;
 
 /**
  *
  * @author Bernat
  */
-public class JDBCTorn implements TornDAO {
-
+public class JDBCCategoria implements CategoriaDAO {
     @Override
-    public Torn get(long id) throws DAOException {
+    public Categoria get(long id) throws DAOException {
         try {
-            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("Select * from torn where id = ?");
+            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("Select * from categoria where idCategoria = ?");
             query.setString(1, Long.toString(id));
             ResultSet result = query.executeQuery();
-            Torn t = new Torn(result.getString("horari"), result.getLong("id"));
+            Categoria c = new Categoria(result.getString("categoria"), result.getLong("idCategoria"));
             if(result.next()){
-                return t;
+                return c;
             }
             return null;
         } catch (SQLException ex) {
@@ -41,13 +41,13 @@ public class JDBCTorn implements TornDAO {
     }
 
     @Override
-    public List<Torn> getAll() throws DAOException {
+    public List<Categoria> getAll() throws DAOException {
         try {
             Statement query = MySQLConnection.getInstance().getConnection().createStatement();
-            ResultSet result = query.executeQuery("Select * from torn");
-            List<Torn> llista = new ArrayList<>();
+            ResultSet result = query.executeQuery("Select * from categoria");
+            List<Categoria> llista = new ArrayList<>();
             while (result.next()) {
-                llista.add(new Torn(result.getString("Horari"), result.getInt("idTorn")));
+                llista.add(new Categoria(result.getString("Categoria"), result.getInt("idCategoria")));
                
             }
             return llista;
@@ -56,15 +56,21 @@ public class JDBCTorn implements TornDAO {
         }
     }
 
+
+
+
+
+
+
     @Override
-    public void add(Torn t) throws DAOException {
+    public void add(Categoria t) throws DAOException {
         try {
-            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("INSERT INTO torn(horari) values(?)", Statement.RETURN_GENERATED_KEYS);
-            query.setString(1, t.getHorari());
+            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("INSERT INTO categoria() values(?)", Statement.RETURN_GENERATED_KEYS);
+            query.setString(1, t.getTipus());
             query.executeUpdate();
             ResultSet rst = query.getGeneratedKeys();
             if(rst.next()){
-                t.setId(rst.getInt("id"));
+                t.setId(rst.getInt("idCategoria"));
             }
         } catch (SQLException ex) {
             throw new DAOException();
@@ -72,23 +78,22 @@ public class JDBCTorn implements TornDAO {
     }
 
     @Override
-    public void delete(Torn t) throws DAOException {
+    public void delete(Categoria t) throws DAOException {
         try {
-            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("DELETE FROM TORN WHERE ID = ?");
+            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("DELETE FROM TORN WHERE idCategoria = ?");
             query.setString(1, Long.toString(t.getId()));
             query.executeUpdate();
         } catch (SQLException ex) {
             throw new DAOException();
         }
-        
     }
 
     @Override
-    public void update(Torn t) throws DAOException {
+    public void update(Categoria c) throws DAOException {
         try {
-            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("UPDATE TORN SET HORARI = ? WHERE ID = ?");
-            query.setString(1, t.getHorari());
-            query.setString(2, Long.toString(t.getId()));
+            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("UPDATE TORN SET HORARI = ? WHERE idCategoria = ?");
+            query.setString(1, c.getTipus());
+            query.setString(2, Long.toString(c.getId()));
         } catch (SQLException ex) {
             Logger.getLogger(JDBCTorn.class.getName()).log(Level.SEVERE, null, ex);
         }
