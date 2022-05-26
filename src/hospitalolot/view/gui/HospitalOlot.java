@@ -4,7 +4,10 @@
  */
 package hospitalolot.view.gui;
 
+import hospitalolot.model.business.entities.Torn;
 import hospitalolot.model.business.entities.Unitat;
+import hospitalolot.model.business.entities.dates;
+import hospitalolot.model.persistence.dao.implementations.jdbc.JDBCTorn;
 import hospitalolot.model.persistence.dao.implementations.jdbc.JDBCUnitat;
 import hospitalolot.model.persistence.exception.DAOException;
 
@@ -16,14 +19,9 @@ import hospitalolot.model.persistence.exception.DAOException;
 public class HospitalOlot {
 
     public static void main(String[] args) throws DAOException {
-    try {  
-        String uni = "Unitat5";
-    JDBCUnitat b = new JDBCUnitat();
-    b.delete(uni);
-    }catch (DAOException e){
-        System.out.println(e);
-            System.out.println("malament");
-            }
+        JDBCUnitat ju = new JDBCUnitat();
+        Unitat u = ju.get(2);
+        System.out.println(u.getId() + u.getTipus());
     }
     
     
