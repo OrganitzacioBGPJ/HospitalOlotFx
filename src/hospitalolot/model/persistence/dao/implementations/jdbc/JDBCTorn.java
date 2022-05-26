@@ -26,15 +26,16 @@ public class JDBCTorn implements TornDAO {
     @Override
     public Torn get(long id) throws DAOException {
         try {
-            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("Select * from torn where id = ?");
-            query.setString(1, Long.toString(id));
+            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("Select * from torn where idtorn = ?");
+            query.setLong(1, id);
             ResultSet result = query.executeQuery();
-            Torn t = new Torn(result.getString("horari"), result.getLong("id"));
-            if(result.next()){
+            if (result.next()) {
+                Torn t = new Torn(result.getString("horari"), result.getLong("idTorn"));
                 return t;
             }
             return null;
         } catch (SQLException ex) {
+            System.out.println(ex);
             throw new DAOException();
         }
 
@@ -44,11 +45,11 @@ public class JDBCTorn implements TornDAO {
     public List<Torn> getAll() throws DAOException {
         try {
             Statement query = MySQLConnection.getInstance().getConnection().createStatement();
-            ResultSet result = query.executeQuery("Select * from torn");
+            ResultSet result = query.executeQuery("Select * from torns");
             List<Torn> llista = new ArrayList<>();
             while (result.next()) {
-                llista.add(new Torn(result.getString("Horari"), result.getInt("idTorn")));
-               
+                llista.add(new Torn(result.getString("horari"), result.getInt("idTorn")));
+
             }
             return llista;
         } catch (SQLException ex) {
@@ -63,7 +64,7 @@ public class JDBCTorn implements TornDAO {
             query.setString(1, t.getHorari());
             query.executeUpdate();
             ResultSet rst = query.getGeneratedKeys();
-            if(rst.next()){
+            if (rst.next()) {
                 t.setId(rst.getInt("id"));
             }
         } catch (SQLException ex) {
@@ -74,21 +75,21 @@ public class JDBCTorn implements TornDAO {
     @Override
     public void delete(Torn t) throws DAOException {
         try {
-            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("DELETE FROM TORN WHERE ID = ?");
-            query.setString(1, Long.toString(t.getId()));
+            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("DELETE FROM torn WHERE IDtorn = ?");
+            query.setLong(1, t.getId());
             query.executeUpdate();
         } catch (SQLException ex) {
             throw new DAOException();
         }
-        
+
     }
 
     @Override
     public void update(Torn t) throws DAOException {
         try {
-            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("UPDATE TORN SET HORARI = ? WHERE ID = ?");
+            PreparedStatement query = MySQLConnection.getInstance().getConnection().prepareStatement("UPDATE TORN SET HORARI = ? WHERE IDtorn = ?");
             query.setString(1, t.getHorari());
-            query.setString(2, Long.toString(t.getId()));
+            query.setLong(2, t.getId());
         } catch (SQLException ex) {
             Logger.getLogger(JDBCTorn.class.getName()).log(Level.SEVERE, null, ex);
         }
